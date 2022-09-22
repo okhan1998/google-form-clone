@@ -1,25 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import Mainbody from './components/Mainbody';
+import Form from './components/Form'
+import * as React from 'react'
+import { createGlobalStyle } from 'styled-components'
+import reset from 'styled-reset'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Question_form from './components/Question_form';
+import Userform from './components/Userform'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  /* other styles */
+`
 
-export default App;
+const App = () => (
+  <React.Fragment>
+    <GlobalStyle/>
+    <BrowserRouter>
+      <Routes>
+        <Route path = '/form/:id' element={
+        <>
+        <Form />
+        <Question_form />
+        </>
+        } />
+
+        <Route path = '/response' element={
+          <Userform />
+        } />
+
+        <Route path = '/' element={<Mainbody />} />
+      </Routes>
+
+    </BrowserRouter>
+  </React.Fragment>
+)
+
+export default App
